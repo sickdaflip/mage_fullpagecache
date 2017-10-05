@@ -11,8 +11,6 @@ app/locale/en_US/template/email/po_core_new_question_to_support.html    app/loca
 app/locale/en_US/Potato_Core.csv                                        app/locale/en_US/Potato_Core.csv
 app/locale/en_US/Potato_FullPageCache.csv                               app/locale/en_US/Potato_FullPageCache.csv
 lib/Potato/Fpc/Mobile/Detect.php                                        lib/Potato/Fpc/Mobile/Detect.php
-skin/adminhtml/default/default/po_core/css/*                            skin/adminhtml/base/default/po_core/css/*
-skin/adminhtml/default/default/po_core/images/*                         skin/adminhtml/base/default/po_core/images/*
-skin/adminhtml/default/default/po_core/js/*                             skin/adminhtml/base/default/po_core/js/*
+skin/adminhtml/default/default/po_core/                                 skin/adminhtml/base/default/po_core/
 skin/frontend/base/default/po_fpc/css/styles.css                        skin/frontend/base/default/po_fpc/css/styles.css
 
