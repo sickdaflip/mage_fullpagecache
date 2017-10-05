@@ -1,0 +1,239 @@
+<?xml version="1.0"?>
+<config>
+    <sections>
+        <po_fpc translate="label" module="po_fpc">
+            <label>Full Page Cache</label>
+            <tab>po_core</tab>
+            <frontend_type>text</frontend_type>
+            <sort_order>1000</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <sort_order>10</sort_order>
+                    <fields>
+                        <max_allowed_size translate="label">
+                            <label>Max. Cache Size (Mb)</label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>10</sort_order>
+                        </max_allowed_size>
+                        <mobile_detect translate="label">
+                            <label>Use Mobile Detect</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <tooltip>Enable this option if your website uses separate theme for phone/tablet devices. Keep this option disabled if your website uses single responsive theme.</tooltip>
+                            <sort_order>20</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </mobile_detect>
+                        <mobile_separate translate="label">
+                            <label>Separate Phone/Tablet Devices Cache</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <tooltip>if "Yes" cache will be separate for phone and tablet devices</tooltip>
+                            <sort_order>30</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <depends><mobile_detect>1</mobile_detect></depends>
+                        </mobile_separate>
+                        <auto_clean>
+                            <label>Flush Cache Automatially When</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>po_fpc/source_autoClean</source_model>
+                            <sort_order>40</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <can_be_empty>1</can_be_empty>
+                        </auto_clean>
+                        <cronjob translate="label">
+                            <label>Cronjob for clear cache by catalog rule</label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>45</sort_order>
+                        </cronjob>
+                        <readme translate="label">
+                            <label>Installation Guide &amp; FAQ</label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>link</frontend_type>
+                            <frontend_model>po_fpc/adminhtml_system_config_form_field_link</frontend_model>
+                            <href>https://potatocommerce.com/full-page-cache.html#readme</href>
+                            <target>_blank</target>
+                            <sort_order>50</sort_order>
+                        </readme>
+                        <exclude_guide translate="label">
+                            <label>Exclude blocks from caching</label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>link</frontend_type>
+                            <frontend_model>po_fpc/adminhtml_system_config_form_field_link</frontend_model>
+                            <href>https://potatocommerce.com/fpc-exclude</href>
+                            <target>_blank</target>
+                            <sort_order>60</sort_order>
+                        </exclude_guide>
+                    </fields>
+                </general>
+                <auto_generation translate="label">
+                    <label>Crawler - Automatic Cache Generation</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <sort_order>20</sort_order>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enabled</label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                        </enabled>
+                        <thread_number translate="label comment">
+                            <label>Crawler Thread Number</label>
+                            <tooltip>Number of parallel requests for cache auto-generation process. You can increase option value to improve cache warming time, but please note that it will increase server load. Thereby, if your server load is very high during cache warming, then try decreasing the option value.</tooltip>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                        </thread_number>
+                        <pages_per_cycle translate="label comment">
+                            <label>Number of pages per cycle</label>
+                            <comment>scheduled via cron each minute (by default)</comment>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>30</sort_order>
+                            <tooltip>Crawler can be terminated by your server if max_execution_time reached. If this happens, then try decreasing option value or increase max_execution_time</tooltip>
+                        </pages_per_cycle>
+                        <customer_group>
+                            <label>Run Crawler For Customer Group(s)</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>po_fpc/source_customerGroup</source_model>
+                            <sort_order>50</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </customer_group>
+                        <protocol>
+                            <label>Run Crawler For Protocol(s)</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>po_fpc/source_protocol</source_model>
+                            <sort_order>60</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </protocol>
+                        <debug translate="label">
+                            <label>Enable Crawler Logging</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <tooltip>if "Yes" will be created file "var/log/po_fpc_crawler.log" with more detailed information about process.</tooltip>
+                            <sort_order>70</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                        </debug>
+                        <useragent translate="label">
+                            <label>User Agents Used for Crawling Pages</label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <frontend_model>po_fpc/adminhtml_system_config_form_field_useragent</frontend_model>
+                            <backend_model>po_fpc/source_backend_serialized</backend_model>
+                            <sort_order>80</sort_order>
+                            <comment><a href="http://www.useragentstring.com/pages/useragentstring.php">List of User Agent</a></comment>
+                        </useragent>
+                        <source>
+                            <label>Source</label>
+                            <frontend_type>select</frontend_type>
+                            <source_model>po_fpc/source_crawlerSource</source_model>
+                            <sort_order>90</sort_order>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </source>
+                        <source_path>
+                            <label>Sitemap (Url|Path)</label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                            <depends><source>2</source></depends>
+                            <frontend_type>text</frontend_type>
+                            <comment>web url to file or absolute path</comment>
+                            <sort_order>100</sort_order>
+                        </source_path>
+                        <cronjob translate="label">
+                            <label>Cronjob for scanning</label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>105</sort_order>
+                        </cronjob>
+                        <queue translate="label">
+                            <label>Clear Queue</label>
+                            <frontend_model>po_fpc/adminhtml_system_config_source_button</frontend_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <sort_order>110</sort_order>
+                        </queue>
+                    </fields>
+                </auto_generation>
+                <debug translate="label">
+                    <label>Debug</label>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>0</show_in_website>
+                    <show_in_store>0</show_in_store>
+                    <sort_order>30</sort_order>
+                    <fields>
+                        <enabled translate="label">
+                            <label>Enable Page Cache Debug</label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>10</sort_order>
+                        </enabled>
+                        <ip_addresses translate="label">
+                            <label>Ip Address(es) (comma separated)</label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_type>text</frontend_type>
+                            <sort_order>20</sort_order>
+                        </ip_addresses>
+                        <block_name_hint translate="label">
+                            <label>Block Name Hints</label>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>0</show_in_website>
+                            <show_in_store>0</show_in_store>
+                            <frontend_type>select</frontend_type>
+                            <source_model>adminhtml/system_config_source_yesno</source_model>
+                            <sort_order>30</sort_order>
+                        </block_name_hint>
+                    </fields>
+                </debug>
+            </groups>
+        </po_fpc>
+    </sections>
+</config>

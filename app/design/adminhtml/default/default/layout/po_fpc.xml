@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<layout>
+    <adminhtml_cache_index>
+        <reference name="cache.additional">
+            <block type="po_fpc/adminhtml_cache_additional" name="po_fpc.cache.additional" template = "po_fpc/cache_additional.phtml" />
+        </reference>
+    </adminhtml_cache_index>
+    <adminhtml_potato_page_list>
+        <reference name="content">
+            <block type="po_fpc/adminhtml_page" name="po_fpc.page"/>
+        </reference>
+    </adminhtml_potato_page_list>
+</layout>

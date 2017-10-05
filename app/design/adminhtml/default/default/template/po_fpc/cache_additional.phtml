@@ -1,0 +1,143 @@
+<?php
+$tags = $this->getRegisteredCacheTags();
+?>
+<div class="content-header">
+    <h3><?php echo $this->__('PotatoCommerce Full Page Cache Storage Management')?></h3>
+    <?php if ($this->getInfoItems() > 0):?>
+        <div class="grid">
+            <div class="hor-scroll">
+                <table class="data" cellspacing="0">
+                    <thead>
+                        <tr class="headings">
+                            <th class=" no-link"><span class="nobr"><?php echo $this->__('Store Name')?></span></th>
+                            <th class=" no-link"><span class="nobr"><?php echo $this->__('Customer Group')?></span></th>
+                            <th class=" no-link"><span class="nobr"><?php echo $this->__('Currency Code')?></span></th>
+                            <th class=" no-link"><span class="nobr"><?php echo $this->__('Is Secure Cache (HTTPS)')?></span></th>
+                            <th class=" no-link"><span class="nobr"><?php echo $this->__('Is Mobile Cache')?></span></th>
+                            <th class=" no-link"><span class="nobr"><?php echo $this->__('Total Pages')?></span></th>
+                            <th class=" no-link"><span class="nobr"><?php echo $this->__('Cached Pages')?></span></th>
+                            <th class=" no-link"><span class="nobr"><?php echo $this->__('Size')?></span></th>
+                            <th class=" no-link"><span class="nobr"><?php echo $this->__('Action')?></span></th>
+                        </tr>
+                    </thead>
+                    <?php foreach ($this->getInfoItems() as $_item):?>
+                    <tr>
+                        <td>
+                            <?php echo $_item['store_name']?>
+                        </td>
+                        <td>
+                            <?php echo $_item['group_name']?>
+                        </td>
+                        <td>
+                            <?php echo $_item['currency']?>
+                        </td>
+                        <td>
+                            <?php echo $_item['is_secure']?>
+                        </td>
+                        <td>
+                            <?php echo $_item['is_mobile']?>
+                        </td>
+                        <td>
+                            <?php echo $_item['total']?>
+                        </td>
+                        <td>
+                            <?php echo $_item['progress']?>
+                        </td>
+                        <td>
+                            <?php echo $this->helper('po_fpc')->formatSize($_item['size'])?>
+                        </td>
+                        <td>
+                            <a href="<?php echo $this->getRemoveTagUrl($_item['tags'])?>" title="<?php echo $_item['tags']?>"><?php echo $this->__('Remove')?></a>
+                        </td>
+                    </tr>
+                    <?php endforeach;?>
+                </table>
+            </div>
+        </div>
+    <?php endif;?>
+    <table>
+        <tr>
+            <td>
+                <h3><?php echo $this->__('Clear by cache tags:')?></h3>
+            </td>
+        </tr>
+    </table>
+</div>
+<div class="cache-tag-list">
+    <?php if(!empty($tags)):?>
+        <form id="cache_tag_clear" method="GET" action="<?php echo $this->getUrl('adminhtml/potato_storage_cache/remove')?>">
+            <select name="tag">
+                <?php foreach ($tags as $_tag):?>
+                    <option value="<?php echo $_tag?>"><?php echo $_tag . " " . $this->getDescription($_tag);?></option>
+                <?php endforeach;?>
+            </select>
+            <button onclick="$('cache_tag_clear').submit()" class="scalable " type="button" title="<?php echo $this->__('Submit')?>"><span><span><?php echo $this->__('Submit')?></span></span></button>
+        </form>
+    <?php else:?>
+        <p><?php echo $this->__('Cache is empty')?></p>
+    <?php endif;?>
+</div>
+<div class="content-header">
+    <table cellspacing="0">
+        <tbody>
+        <tr>
+            <td style="width:50%;"><h3><?php echo $this->__('Cache HIT/MISS statistic per hour')?></h3></td>
+            <td class="form-buttons">
+                <button title="<?php echo $this->__('Show / Hide');?>" type="button" class="scalable"
+                        onclick="poFpcStatToggle();">
+                    <span><span><span><?php echo $this->__('Show / Hide');?></span></span></span>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+<div id="po-fpc-stat-container">
+    <?php $cacheMissData = $this->getCacheMissData();?>
+    <?php if (count($cacheMissData) === 0) :?>
+        <?php echo $this->__('No data available');?>
+    <?php else: ?>
+    <div id="potato-cache-hit-miss-stat"></div>
+    <script data-cfasync="false" type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script data-cfasync="false" type="text/javascript">
+        google.charts.load('current', {packages: ['corechart', 'line']});
+        google.charts.setOnLoadCallback(drawLineColors);
+
+        function drawLineColors() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', '<?php echo $this->__('Date');?>');
+            data.addColumn('number', '<?php echo $this->__('Hit');?>');
+            data.addColumn('number', '<?php echo $this->__('Miss');?>');
+
+            data.addRows(<?php echo Zend_Json::encode($cacheMissData);?>);
+
+            var options = {
+                legend: { position: 'top', maxLines: 3 },
+                bar: { groupWidth: '75%' },
+                isStacked: true,
+                height: 500
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('potato-cache-hit-miss-stat'));
+            chart.draw(data, options);
+            poFpcContainerInit();
+        }
+    </script>
+    <?php endif; ?>
+</div>
+<script type="text/javascript">
+    var poFpcStatToggle = function () {
+        $('po-fpc-stat-container').toggle();
+        if (typeof(Storage) === "undefined") {
+            return;
+        }
+        localStorage.setItem('po_fpc-stat-container', $('po-fpc-stat-container').getStyle('display'));
+    };
+    var poFpcContainerInit = function(){
+        if (typeof(Storage) === "undefined") {
+            return;
+        }
+        var display = localStorage.getItem('po_fpc-stat-container') || 'block';
+        $('po-fpc-stat-container').setStyle({'display': display});
+    };
+</script>

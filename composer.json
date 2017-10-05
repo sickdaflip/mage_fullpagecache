@@ -1,0 +1,15 @@
+{
+  "name": "sickdaflip/mage_fullpagecache",
+  "type": "magento-module",
+  "license": "MIT",
+  "description": "FullPageCache for Magento 1.9.3.6",
+  "authors": [
+    {
+      "name": "SickDaFlip",
+      "email": "philippbreitsprecher@gmail.com"
+    }
+  ],
+  "require": {
+    "magento-hackathon/magento-composer-installer": "*"
+  }
+}

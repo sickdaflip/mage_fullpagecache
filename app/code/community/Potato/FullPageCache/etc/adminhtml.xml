@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<config>
+    <menu>
+        <system>
+            <children>
+                <po_fpc translate="title" module="po_fpc">
+                    <title>PotatoCommerce - Full Page Cache</title>
+                    <sort_order>2000</sort_order>
+                    <children>
+                        <po_fpc_pages translate="title" module="po_fpc">
+                            <title>Pages</title>
+                            <sort_order>10</sort_order>
+                            <action>adminhtml/potato_page</action>
+                        </po_fpc_pages>
+                        <po_fpc_cache_management translate="title" module="po_fpc">
+                            <title>Cache Management</title>
+                            <sort_order>20</sort_order>
+                            <action>adminhtml/cache</action>
+                        </po_fpc_cache_management>
+                        <po_fpc_settings translate="title" module="po_fpc">
+                            <title>Settings</title>
+                            <sort_order>30</sort_order>
+                            <action>adminhtml/system_config/edit/section/po_fpc</action>
+                        </po_fpc_settings>
+                    </children>
+                </po_fpc>
+            </children>
+        </system>
+    </menu>
+    <acl>
+        <resources>
+            <admin>
+                <children>
+                    <system>
+                        <children>
+                            <config>
+                                <children>
+                                    <po_fpc>
+                                        <title>PotatoCommerce - Full Page Cache</title>
+                                    </po_fpc>
+                                </children>
+                            </config>
+                            <po_fpc translate="title" module="po_fpc">
+                                <title>PotatoCommerce - Full Page Cache</title>
+                                <sort_order>2000</sort_order>
+                                <children>
+                                    <po_fpc_pages translate="title" module="po_fpc">
+                                        <title>Pages</title>
+                                        <sort_order>10</sort_order>
+                                        <action>adminhtml/potato_fpc_page</action>
+                                    </po_fpc_pages>
+                                    <po_fpc_cache_management translate="title" module="po_fpc">
+                                        <title>Cache Management</title>
+                                        <sort_order>20</sort_order>
+                                        <action>adminhtml/cache</action>
+                                    </po_fpc_cache_management>
+                                    <po_fpc_settings translate="title" module="po_fpc">
+                                        <title>Settings</title>
+                                        <sort_order>30</sort_order>
+                                        <action>adminhtml/system_config/edit/section/po_fpc</action>
+                                    </po_fpc_settings>
+                                </children>
+                            </po_fpc>
+                        </children>
+                    </system>
+                </children>
+            </admin>
+        </resources>
+    </acl>
+    <translate>
+        <modules>
+            <Potato_FullPageCache>
+                <files>
+                    <default>Potato_FullPageCache.csv</default>
+                </files>
+            </Potato_FullPageCache>
+        </modules>
+    </translate>
+</config>
